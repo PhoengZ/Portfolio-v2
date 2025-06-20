@@ -26,8 +26,8 @@ const Submit = handleSubmit(values=>{
 
 </script>
 <template>
-    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center">
-        <div class="w-6/12 flex flex-col justify-start items-start leading-relaxed">
+    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden">
+        <div class="w-8/12 md:w-6/12 flex flex-col justify-start items-start leading-relaxed">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <clipPath id="IdClip" >
@@ -46,10 +46,10 @@ const Submit = handleSubmit(values=>{
                 >
                 </image>
             </svg>
-            <h1 class=" text-3xl font-bold drop-shadow-lg mb-2 md:mb-5">Phaolap Kulteera</h1>
+            <h1 class=" text-3xl font-bold drop-shadow-lg mb-5 text-center md:text-left">Phaolap Kulteera</h1>
             <p class=" text-sm md:text-lg drop-shadow-lg font-semibold text-gray-700 mb-2 md:mb-5">Currently studying at Chulalongkorn University, available for internships or project collaborations.</p>
             <p class=" text-sm md:text-lg font-semibold drop-shadow-lg">Email: <span class=" text-blue-600">pholapcondo11@gmail.com</span></p>
-            <ul class=" flex justify-start gap-5 mt-20 mb-5 md:mb-10">
+            <ul class=" flex justify-start gap-5 mt-20 mb-5 md:mb-10 flex-wrap">
               <li v-for="i in Contact" :key="i.name" class=" drop-shadow-lg">
                 <BaseButton v-if="i.name !== 'Gmail'" class="p-1 rounded-full w-10 h-10" size="small" theme="last" @click="navigateTo(i.goto,{external:true})">
                   <img :src="i.img" alt="Image" class=" w-full h-full rounded-full p-1">
@@ -67,12 +67,12 @@ const Submit = handleSubmit(values=>{
               </li>
             </ul>
         </div>
-        <div class="w-full flex flex-col justify-center items-start px-25 md:px-40 py-4 gap-10">
+        <div class="w-full flex flex-col justify-center items-start px-10 md:px-40 py-4 gap-10">
             <h1 class=" text-center text-3xl md:text-6xl font-extrabold mx-auto text-blue-600 drop-shadow-lg">Contact Page</h1>
             <BaseInput v-model:model-value="Name" placeholder="Name" class=" w-full"/>
             <BaseInput name="email" v-model:model-value="Email" placeholder="Email" class=" w-full"/>
             <textarea v-model="Message" placeholder="Message" required class="border-2 py-4 px-4 border-gray-500 rounded-2xl outline-none transition duration-300 focus:border-blue-400 w-full h-20 md:h-40 drop-shadow-lg"></textarea>
-            <BaseButton size="large" theme="first" @click="Submit" class=" mx-auto w-4/12 py-2 px-4 rounded-2xl">{{isSubmiting ? "Submitting":"Submit"}}</BaseButton>
+            <BaseButton size="large" theme="first" @click="Submit" class=" mx-auto w-4/12 py-1 px-2 md:px-4 md:py-2 rounded-2xl">{{isSubmiting ? "Submitting":"Submit"}}</BaseButton>
         </div>
     </div>
 </template>
