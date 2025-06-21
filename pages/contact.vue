@@ -58,16 +58,19 @@ const Submit =  handleSubmit(async (values)=>{
 
 </script>
 <template>
-    <div v-if="result" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md">
+  <transition name="fade-slide" appear mode="out-in">
+    <div v-if="result" class="fixed top-2/12 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md">
       <div
-        :class="status === 'success' ? 'bg-blue-200 text-gray-800 border-blue-400' : 'bg-red-100 text-red-800 border-red-400'"
+        :class="status === 'success' ? 'bg-blue-200 text-blue-600 border-blue-400' : 'bg-red-100 text-red-800 border-red-400'"
         class="p-6 rounded-2xl border-2 shadow-xl transition-all duration-300 ease-in-out text-center"
       >
         <h2 class="text-2xl font-bold mb-2 capitalize">{{ status }}</h2>
         <p class="text-sm">{{ result }}</p>
       </div>
     </div>
-    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden" :class="result ? 'blur-md':'blur-none'">
+  </transition>
+    
+    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden" >
         <div class="w-8/12 md:w-6/12 flex flex-col justify-start items-start leading-relaxed">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -118,3 +121,19 @@ const Submit =  handleSubmit(async (values)=>{
         
     </div>
 </template>
+<style scoped>
+.fade-slide-enter-active,
+.fade-slide-leave-active{
+  transition: all 0.8s ease
+}
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.fade-slide-enter-to,
+.fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
