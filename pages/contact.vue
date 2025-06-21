@@ -11,22 +11,63 @@ const {handleSubmit,isSubmiting } = useForm({
 const Name = ref("")
 const Email = ref("")
 const Message = ref("")
+const accessToken = ref("13dffaab-e500-4e4f-a303-547e1f4ab774") 
 const Contact = ref([
   {name: "Github", goto: "https://github.com/PhoengZ", img: "/Image/github.png"},
   {name: "Linkedin", goto: "https://www.linkedin.com/in/phaolapkulteera/", img: "/Image/linked-in.png"},
   {name: "Instargram", goto: "https://www.instagram.com/c_phaooo_/", img: "/Image/instargram.png"},
   {name: "Gmail", goto: "mailto:pholapcondo11@gmail.com", img: "/Image/Gmail_icon_(2020).svg.png"}
 ])
-const Submit = handleSubmit(values=>{
-    const subject = encodeURIComponent('New Message from Portfolio Contact Form')
-    const body = encodeURIComponent(`From: ${Name.value}\nEmail: ${values}\n\n${Message.value}`)
-    const mailtoLink = `mailto:pholapcondo11@gmail.com?subject=${subject}&body=${body}`
-    window.location.href = mailtoLink
+const result = ref("");
+const status = ref("");
+const Submit =  handleSubmit(async (values)=>{
+    result.value = "Please wait...";
+  try {
+    const response = await $fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: {
+        access_key:accessToken.value,
+        subject: "New Submission from portfolio contact",
+        name:Name.value,
+        email:Email.value,
+        message:Message.value
+      },
+    });
+    result.value = response.message;
+    if (response.success) {
+      status.value = "success";
+    } else {
+      console.log(response);
+      status.value = "error";
+    }
+  } catch (error) {
+    console.log(error);
+    status.value = "error";
+    result.value = "Something went wrong!";
+  } finally {
+    Name.value = "";
+    Email.value = "";
+    Message.value = "";
+    setTimeout(() => {
+      result.value = "";
+      status.value = "";
+    }, 5000);
+  }
 })
 
 </script>
 <template>
-    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden">
+    <div v-if="result" class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-[90%] max-w-md">
+      <div
+        :class="status === 'success' ? 'bg-blue-200 text-gray-800 border-blue-400' : 'bg-red-100 text-red-800 border-red-400'"
+        class="p-6 rounded-2xl border-2 shadow-xl transition-all duration-300 ease-in-out text-center"
+      >
+        <h2 class="text-2xl font-bold mb-2 capitalize">{{ status }}</h2>
+        <p class="text-sm">{{ result }}</p>
+      </div>
+    </div>
+    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden" :class="result ? 'blur-md':'blur-none'">
         <div class="w-8/12 md:w-6/12 flex flex-col justify-start items-start leading-relaxed">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -74,5 +115,6 @@ const Submit = handleSubmit(values=>{
             <textarea v-model="Message" placeholder="Message" required class="border-2 py-4 px-4 border-gray-500 rounded-2xl outline-none transition duration-300 focus:border-blue-400 w-full h-20 md:h-40 drop-shadow-lg"></textarea>
             <BaseButton size="large" theme="first" @click="Submit" class=" mx-auto w-4/12 py-1 px-2 md:px-4 md:py-2 rounded-2xl">{{isSubmiting ? "Submitting":"Submit"}}</BaseButton>
         </div>
+        
     </div>
 </template>
