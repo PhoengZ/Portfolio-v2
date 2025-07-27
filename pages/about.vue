@@ -33,7 +33,7 @@ useHead({
                 I’m currently open to software engineering internship opportunities.
             </p>
             <BaseButton size="medium" theme="first" class=" w-6/12 py-2 px-4">
-                <a href="/public/Resume.pdf" download>
+                <a href="/Resume.pdf" download>
                     Download Resume
                 </a>
             </BaseButton>
