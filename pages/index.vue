@@ -6,7 +6,7 @@ const Contact = ref([
   {name: "Github", goto: "https://github.com/PhoengZ", img: "/Image/github.png"},
   {name: "Linkedin", goto: "https://www.linkedin.com/in/phaolapkulteera/", img: "/Image/linked-in.png"},
   {name: "Instargram", goto: "https://www.instagram.com/c_phaooo_/", img: "/Image/instargram.png"},
-  {name: "Gmail", goto: "mailto:pholapcondo11@gmail.com", img: "/Image/Gmail_icon_(2020).svg.png"}
+  {name: "Gmail", goto: "https://mail.google.com/mail/?view=cm&to=pholapcondo11@gmail.com", img: "/Image/Gmail_icon_(2020).svg.png"}
 ])
 const Goto = ref([
   {name:"Contact",goto:"/contact"},
