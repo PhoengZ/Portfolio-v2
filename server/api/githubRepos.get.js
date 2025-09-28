@@ -1,11 +1,11 @@
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
-  const username = 'PhoengZ'
 
-  const res = await $fetch(`https://api.github.com/users/${username}/repos?type=owner&sort=pushed&direction=desc`, {
+  const res = await $fetch(`https://api.github.com/user/repos?affiliation=owner,collaborator&sort=pushed&direction=desc&visibility=public`, {
     headers: {
       Authorization: `token ${config.githubToken}`
     }
   })
+  console.log(res);
   return res
 })
