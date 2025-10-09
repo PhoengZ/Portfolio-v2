@@ -15,6 +15,7 @@ export default defineEventHandler(async (event) => {
         Authorization: `token ${githubToken}`,
       },
     });
+    // console.log(response);
     return response;
   } catch (error) {
     console.error('GitHub API error:', error);

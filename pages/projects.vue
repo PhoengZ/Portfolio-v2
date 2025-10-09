@@ -5,14 +5,21 @@ useHead({
 import { Icon } from '@iconify/vue'
 const { data: response, error: err, status } = await useFetch('/api/githubRepos')
 const repositores = ref([])
-
+const lang = ref({})
+const totalByte = ref(0)
 if (status.value === 'error') {
   console.error(err.value)
 } else {
+  const totalLang = {}
   const repoList = await Promise.all(
     response.value.map(async (repo) => {
       const { data: langData } = await useFetch(`/api/githubLanguage?url=${encodeURIComponent(repo.languages_url)}`);
-
+      if (langData.value){
+        for (const [key, value] of Object.entries(langData.value)){
+          totalLang[key] = (totalLang[key] || 0) + value
+          totalByte.value += value
+        }
+      }
       return {
         id: repo.id,
         name: repo.name,
@@ -31,11 +38,23 @@ if (status.value === 'error') {
     })
   );
   repositores.value = repoList;
+  lang.value = totalLang
 }
+const sortedLang = computed(()=>{
+  if (!lang.value) return [];
+  return Object.entries(lang.value).sort((a, b) => b[1] - a[1]);
+})
 </script>
 
 <template>
   <div class="px-4 py-10 max-w-7xl mx-auto">
+    <ul class=" flex flex-row flex-wrap justify-center gap-5 mb-5 sm:mb-10">
+      <li v-for="language in sortedLang" :key="language[0]" class=" flex items-center border-2 bg-gray-200 rounded-md p-2 
+      border-blue-300 gap-2 shadow-2xl text-xs font-semibold transform hover:scale-105 duration-200">
+        <Icon :icon="IconmapLanguage[language[0]] || 'mdi:code-tags'" width="20" height="20" />
+        {{ language[0] }} {{(language[1] * 100 / totalByte).toFixed(2)}}%
+      </li>
+    </ul>
     <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       <li
         v-for="repo in repositores"

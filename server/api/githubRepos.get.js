@@ -6,6 +6,6 @@ export default defineEventHandler(async (event) => {
       Authorization: `token ${config.githubToken}`
     }
   })
-  console.log(res);
+  // console.log(res);
   return res
 })
