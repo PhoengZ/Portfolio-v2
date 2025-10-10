@@ -50,7 +50,7 @@ const sortedLang = computed(()=>{
   <div class="px-4 py-10 max-w-7xl mx-auto">
     <ul class=" flex flex-row flex-wrap justify-center gap-5 mb-5 sm:mb-10">
       <li v-for="language in sortedLang" :key="language[0]" class=" flex items-center border-2 bg-gray-200 rounded-md p-2 
-      border-blue-300 gap-2 shadow-2xl text-xs font-semibold transform hover:scale-105 duration-200">
+      border-blue-300 gap-2 shadow-2xl text-xs font-semibold transform hover:scale-105 duration-200 cursor-pointer">
         <Icon :icon="IconmapLanguage[language[0]] || 'mdi:code-tags'" width="20" height="20" />
         {{ language[0] }} {{(language[1] * 100 / totalByte).toFixed(2)}}%
       </li>
