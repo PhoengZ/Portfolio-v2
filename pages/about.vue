@@ -34,7 +34,7 @@ useHead({
             </p>
             <BaseButton size="medium" theme="first" class=" w-6/12 py-2 px-4">
                 <a href="/Resume.pdf" _target="blank" rel="noopener noreferrer">
-                    Download Resume
+                    View Resume
                 </a>
             </BaseButton>
         </div>

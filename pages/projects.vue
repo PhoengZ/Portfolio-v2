@@ -3,7 +3,7 @@ useHead({
     title:"My Projects"
 })
 import { Icon } from '@iconify/vue'
-const { data: response, error: err, status } = await useFetch('/api/githubRepos')
+const { data: response, error: err, status } = await useFetch('/api/github/repos')
 const repositores = ref([])
 const lang = ref({})
 const totalByte = ref(0)
@@ -13,7 +13,7 @@ if (status.value === 'error') {
   const totalLang = {}
   const repoList = await Promise.all(
     response.value.map(async (repo) => {
-      const { data: langData } = await useFetch(`/api/githubLanguage?url=${encodeURIComponent(repo.languages_url)}`);
+      const { data: langData } = await useFetch(`/api/github/languages?url=${encodeURIComponent(repo.languages_url)}`);
       if (langData.value){
         for (const [key, value] of Object.entries(langData.value)){
           totalLang[key] = (totalLang[key] || 0) + value
