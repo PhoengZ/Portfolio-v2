@@ -70,7 +70,7 @@ const Submit =  handleSubmit(async (values)=>{
     </div>
   </transition>
     
-    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-x-hidden" >
+    <div class=" flex flex-col md:flex-row max-h-screen min-h-screen w-full p-5 md:p-15 items-center overflow-hidden" >
         <div class="w-8/12 md:w-6/12 flex flex-col justify-start items-start leading-relaxed">
             <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
