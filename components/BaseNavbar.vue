@@ -3,7 +3,8 @@ const items = ref([
     {name:"Home",option:"/"},
     {name:"Project",option:"/projects"},
     {name:"About",option:"/about"},
-    {name:"Contact",option:"/contact"}
+    {name:"Contact",option:"/contact"},
+    {name:"Certificate", option:"/certificates"}
 ])
 </script>
 <template>
