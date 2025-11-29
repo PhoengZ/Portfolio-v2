@@ -26,7 +26,7 @@ const certificates = ref([
                 <div v-for="cert in certificates" :key="cert.name" 
                     class="group relative bg-white/80 backdrop-blur-sm rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 h-64 flex flex-col justify-center items-center cursor-pointer border border-white/50"
                 >
-                    <a :href="`/certificates/${cert.file}`" target="_blank" class="absolute inset-0 z-20"></a>
+                    <a :href="`/certificates/${cert.file}`" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-20"></a>
                     
                     <div class="p-6 text-center z-10 transition-all duration-300 group-hover:opacity-0">
                         <div class="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center text-white">
